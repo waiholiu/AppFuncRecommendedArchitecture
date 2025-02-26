@@ -1,0 +1,25 @@
+# Variables
+resourceGroup="todel-managedadopool"         # Your resource group name
+vnetName="vnet-managedado"                       # Your existing VNet name
+subnetName="sn-aci"                # The name of the new subnet
+aciName="testaci"                         # Name of the ACI
+containerImage="nginx"                  # Replace with your container image name
+containerPort=80                        # Port to expose on the container
+location="australiaeast"                       # Azure region
+cpu=1                                    # Number of CPU cores for the container
+memory=1.5                                # Memory for the container in GB
+
+
+
+# Step 2: Deploy the Azure Container Instance into the new subnet
+az container create \
+  --resource-group $resourceGroup \
+  --name $aciName \
+  --image $containerImage \
+  --vnet $vnetName \
+  --subnet $subnetName \
+  --ports $containerPort \
+  --cpu $cpu \
+  --memory $memory \
+  --location $location \
+  --os-type 'Linux'
